@@ -13,6 +13,7 @@ public class FXMLController {
     private AnchorPane start;
     @FXML
     private AnchorPane game;
+
     @FXML
     private Label label;
     @FXML
@@ -98,6 +99,7 @@ public class FXMLController {
     @FXML
     private void OKButtonAction(ActionEvent event) {
         start.setVisible(false);
+
         System.out.println("You clicked OK!");
         game.setVisible(true);
 
@@ -111,7 +113,9 @@ public class FXMLController {
     
     public void initialize() {
         // TODO
+        start.setVisible(true);
 
+        game.setVisible(false);
         for(int i=0; i<6; i++){
             for (int j=0; j<6; j++){
                 try
