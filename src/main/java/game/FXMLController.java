@@ -6,9 +6,13 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 
 public class FXMLController {
-    
+    @FXML
+    private AnchorPane start;
+    @FXML
+    private AnchorPane game;
     @FXML
     private Label label;
     @FXML
@@ -85,7 +89,19 @@ public class FXMLController {
     private Button btn55;
 
     private Button [][] btns=new Button[6][6];
+    @FXML
+    private void B_startClick(ActionEvent event) {
+        /*gamepane.setVisible(true);
+        start.setVisible(false);
+        play.begin();*/
+    }
+    @FXML
+    private void OKButtonAction(ActionEvent event) {
+        start.setVisible(false);
+        System.out.println("You clicked OK!");
+        game.setVisible(true);
 
+    }
 
     @FXML
     private void handleButtonAction(ActionEvent event) {

@@ -1,3 +1,49 @@
 .button {
     -fx-font-weight: bold;
+    -fx-background-color: white;
+    -fx-border-color: black;
+    -fx-border-width: 0.5px;
+}
+#btn00,#btn10,#btn21,#btn34,#btn42{
+    -fx-border-color: black;
+    -fx-border-width: 5px 0.5px 0.5px 5px;
+
+}
+#btn22{
+    -fx-border-color: black;
+    -fx-border-width: 0.5px 5px 5px 5px;
+}
+#btn20,#btn30,#btn40,#btn31,#btn41,#btn12{
+    -fx-border-color:  black;
+    -fx-border-width: 0.5px 0.5px 0.5px 5px;
+}
+#btn50,#btn51,#btn52,#btn53,#btn54{
+    -fx-border-color:  black;
+    -fx-border-width: 0.5px 0.5px 5px 0.5px;
+}
+
+#btn50, #btn14{
+    -fx-border-color:  black;
+    -fx-border-width: 0.5px 0.5px 5px 5px;
+}
+#btn55{
+    -fx-border-color: black;
+    -fx-border-width: 0.5px  5px 5px 0.5px;
+}
+#btn05{
+    -fx-border-color: black;
+    -fx-border-width: 5px 5px 0.5px 5px;
+}
+#btn01,#btn02, #btn03{
+    -fx-border-color: black;
+    -fx-border-width: 5px 0.5px 0.5px 0.5px;
+}
+
+#btn25,#btn35,#btn45{
+    -fx-border-color: black;
+    -fx-border-width: 0.5px 5px 0.5px 0.5px;
+}
+#btn15{
+    -fx-border-color: black;
+    -fx-border-width: 0.5px 5px 0.5px 5px;
 }
