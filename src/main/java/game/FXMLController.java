@@ -6,6 +6,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
+import javafx.scene.layout.GridPane;
+import javafx.scene.shape.Circle;
 import javafx.scene.layout.AnchorPane;
 
 public class FXMLController {
@@ -15,7 +17,11 @@ public class FXMLController {
     private AnchorPane game;
 
     @FXML
+    private GridPane buttons;
+    @FXML
     private Label label;
+    @FXML
+    private Circle player;
     @FXML
     private Button btn00;
     @FXML
@@ -102,6 +108,18 @@ public class FXMLController {
 
         System.out.println("You clicked OK!");
         game.setVisible(true);
+    }
+    @FXML
+    private void mazeButtonAction(ActionEvent event) {
+        Button btn=(Button)event.getSource();
+
+        int x=Character.getNumericValue(btn.getId().charAt(3));
+        int y=Character.getNumericValue(btn.getId().charAt(4));
+        buttons.setRowIndex(player,x);
+        buttons.setColumnIndex(player,y);
+        System.out.println("You clicked btn"+x+y+"!");
+        System.out.println(player.getLayoutX()+" "+player.getLayoutY());
+
 
     }
 
