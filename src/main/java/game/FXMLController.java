@@ -1,6 +1,8 @@
 package game;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -9,6 +11,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.shape.Circle;
 import javafx.scene.layout.AnchorPane;
+
 
 public class FXMLController {
     @FXML
@@ -95,6 +98,7 @@ public class FXMLController {
     @FXML
     private Button btn55;
 
+
     private Button [][] btns=new Button[6][6];
     @FXML
     private void B_startClick(ActionEvent event) {
@@ -102,25 +106,45 @@ public class FXMLController {
         start.setVisible(false);
         play.begin();*/
     }
+
+    List<String> operators=new ArrayList<>();
+    State state=new State(0,0);
+
+
     @FXML
     private void OKButtonAction(ActionEvent event) {
         start.setVisible(false);
 
         System.out.println("You clicked OK!");
         game.setVisible(true);
+
     }
+
+
+
+
+
     @FXML
     private void mazeButtonAction(ActionEvent event) {
+
         Button btn=(Button)event.getSource();
+        int toX = Character.getNumericValue(btn.getId().charAt(3));
+        int toY = Character.getNumericValue(btn.getId().charAt(4));
 
-        int x=Character.getNumericValue(btn.getId().charAt(3));
-        int y=Character.getNumericValue(btn.getId().charAt(4));
-        buttons.setRowIndex(player,x);
-        buttons.setColumnIndex(player,y);
-        System.out.println("You clicked btn"+x+y+"!");
-        System.out.println(player.getLayoutX()+" "+player.getLayoutY());
+        operators = state.placesWhereYouCanMoveTheBall(buttons.getRowIndex(player), buttons.getColumnIndex(player));
+        //kiíratja a használható operátorokat
+        for (int i = 0; i < operators.size(); i++) {
+            System.out.println(operators.get(i));
+        }
 
-
+        if(operators.contains(btn.getId())) {
+            buttons.setRowIndex(player, toX);
+            buttons.setColumnIndex(player, toY);
+            System.out.println("You clicked btn" + toX + toY + "!");
+            System.out.println(player.getLayoutX() + " " + player.getLayoutY());
+        }
+        else
+            System.out.println("ide nem léphetsz");
     }
 
     @FXML
@@ -132,7 +156,8 @@ public class FXMLController {
     public void initialize() {
         // TODO
         start.setVisible(true);
-
+        buttons.setRowIndex(player,0);
+        buttons.setColumnIndex(player,0);
         game.setVisible(false);
         for(int i=0; i<6; i++){
             for (int j=0; j<6; j++){
