@@ -1,6 +1,10 @@
-game/State.class
-database/jpa/GenericJpaDao.class
-guice/PersistenceModule.class
+database/gamer/Gamer$GamerBuilder.class
 guice/JpaInitializer.class
 game/FXMLController.class
+game/State.class
+database/jpa/GenericJpaDao.class
+database/gamer/GamerDao.class
+database/gamer/Gamer.class
+database/jpa/DBTools.class
+guice/PersistenceModule.class
 game/MainApp.class
