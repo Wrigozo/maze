@@ -1,3 +1,6 @@
 game/State.class
+database/jpa/GenericJpaDao.class
+guice/PersistenceModule.class
+guice/JpaInitializer.class
 game/FXMLController.class
 game/MainApp.class

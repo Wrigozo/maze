@@ -1,8 +1,10 @@
 package game;
 
 import java.util.List;
-
 import java.util.ArrayList;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class State {
 
     public boolean yourTurn=true;
@@ -25,6 +27,7 @@ public class State {
             {{1, 0, 1, 0}, {1, 0, 1, 0}, {0, 1, 1, 0}, {1, 1, 1, 1}, {1, 1, 1, 1}, {1, 0, 1, 1}},
             {{1, 1, 0, 0}, {1, 1, 0, 1}, {1, 1, 0, 1}, {1, 1, 0, 1}, {1, 1, 0, 1}, {1, 0, 0, 1}}
     };
+    private static Logger logger = LoggerFactory.getLogger(State.class);
 
     public State(int actualposX, int actualposY) {
         this.actualPosX=actualposX;
