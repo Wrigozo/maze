@@ -4,6 +4,8 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+import database.gamer.Gamer;
+import database.jpa.DBTools;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -98,6 +100,7 @@ public class FXMLController {
     @FXML
     private Button btn55;
 
+    private Gamer gamer=new Gamer();
 
     private Button [][] btns=new Button[6][6];
     @FXML
@@ -114,6 +117,29 @@ public class FXMLController {
     @FXML
     private void OKButtonAction(ActionEvent event) {
         start.setVisible(false);
+        gamer.setName("Bablan");
+        DBTools valami= new DBTools();
+        valami.addGamer(gamer);
+        valami.updateGamer(gamer);
+        valami.updateGamer(gamer);
+        valami.updateGamer(gamer);
+        valami.updateGamer(gamer);
+        valami.updateGamer(gamer);
+        valami.updateGamer(gamer);
+        valami.updateGamer(gamer);
+        valami.updateGamer(gamer);
+        valami.updateGamer(gamer);
+        valami.updateGamer(gamer);valami.updateGamer(gamer);
+        valami.updateGamer(gamer);
+        valami.updateGamer(gamer);
+        valami.updateGamer(gamer);
+        valami.updateGamer(gamer);valami.updateGamer(gamer);
+        valami.updateGamer(gamer);
+        valami.updateGamer(gamer);
+        valami.updateGamer(gamer);
+        valami.updateGamer(gamer);
+
+
 
         System.out.println("You clicked OK!");
         game.setVisible(true);

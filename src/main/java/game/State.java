@@ -28,25 +28,44 @@ public class State {
             {{1, 1, 0, 0}, {1, 1, 0, 1}, {1, 1, 0, 1}, {1, 1, 0, 1}, {1, 1, 0, 1}, {1, 0, 0, 1}}
     };
     private static Logger logger = LoggerFactory.getLogger(State.class);
+    private int[] lepesek=new int[4];
 
     public State(int actualposX, int actualposY) {
         this.actualPosX=actualposX;
         this.actualPosY=actualposY;
     }
+    void lepesek(int actualX, int actualY) {
+       lepesek=canStep[actualX][actualY];
+    }
+
+    int fel(int x){
+        return x-=1;
+    }
+    int jobbra(int y){
+        return y+=1;
+    }
+    int le(int x){
+        return x+=1;
+    }
+    int balra(int y){
+        return y-=1;
+    }
+
+
 
     public List<String> placesWhereYouCanMoveTheBall(int actualX, int actualY) {
         List<String> list = new ArrayList<>();
-        int lepesek[]=canStep[actualX][actualY];
+        lepesek( actualX, actualY);
         //segédváltozók csak
         int x=actualX;
         int y=actualY;
         for(int i=0; i<lepesek.length;i++){
             if(lepesek[i]!=0){
                 switch (i){ //megvizsálja hanyadik indexű
-                    case 0: actualX-=1;break;
-                    case 1: actualY+=1;break;
-                    case 2: actualX+=1;break;
-                    case 3: actualY-=1;break;
+                    case 0: actualX=fel(actualX);break;
+                    case 1: actualY=jobbra(actualY);break;
+                    case 2: actualX=le(actualX);break;
+                    case 3: actualY=balra(actualY);break;
                 }
                 list.add("btn"+actualX+actualY);
                 actualX=x;
