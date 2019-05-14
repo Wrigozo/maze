@@ -11,15 +11,13 @@ public class State {
 
     //a labda helyzete
     public int actualPosX;
-    public int actualPosY;
-
-    public void setActualPosX(int actualPosX) {
-        this.actualPosX = actualPosX;
-    }
-
-    public void setActualPosY(int actualPosY) {
-        this.actualPosY = actualPosY;
-    }
+    public int actualPosY;private static Logger logger = LoggerFactory.getLogger(State.class);
+    private int[] lepesekPlayer = new int[4];
+    private int[] lepesekEnemy = new int[4];
+    public List<String> ishorizontal;
+    public List<String> isVertical;
+    private int counter=0;
+    private List<String> enableButtons = new ArrayList<>();
 
     //1.fel 2.jobbra 3.le 4.balra
     public static int[][][] canStep = {
@@ -30,9 +28,7 @@ public class State {
             {{1, 0, 1, 0}, {1, 0, 1, 0}, {0, 1, 1, 0}, {1, 1, 1, 1}, {1, 1, 1, 1}, {1, 0, 1, 1}},
             {{1, 1, 0, 0}, {1, 1, 0, 1}, {1, 1, 0, 1}, {1, 1, 0, 1}, {1, 1, 0, 1}, {1, 0, 0, 1}}
     };
-    private static Logger logger = LoggerFactory.getLogger(State.class);
-    private int[] lepesekPlayer = new int[4];
-    private int[] lepesekEnemy = new int[4];
+  ;
 
     public State(int actualposX, int actualposY) {
         this.actualPosX = actualposX;
@@ -59,9 +55,6 @@ public class State {
         return y -= 1;
     }
 
-    List<String> ishorizontal;
-    List<String> isVertical;
-    private List<String> enableButtons = new ArrayList<>();
 
 
     public List<String> getEnableButtons() {
@@ -101,11 +94,8 @@ public class State {
         }
 
     }
-    boolean isConvergePlayer(){
-        return true;
-    }
 
-    int counter=0;
+
     int [] enemylepes(int enemyPosX, int enemyPosY,int playerPosX, int playerPosY){
         int [] s=new int[2];
         s[0]=enemyPosX;
@@ -152,7 +142,7 @@ public class State {
                             enemyPosX += 1;
                     }
 
-
+                logger.info("Enemy position: ("+enemyPosX+", "+enemyPosY+");");
                 s[0]=enemyPosX;
                 s[1]=enemyPosY;
 
