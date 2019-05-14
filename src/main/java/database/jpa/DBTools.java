@@ -6,7 +6,9 @@ import database.gamer.Gamer;
 import database.gamer.GamerDao;
 import guice.PersistenceModule;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class DBTools {
     private GamerDao gmd;
@@ -45,5 +47,8 @@ public class DBTools {
 
         tmp.setScore(tmp.getScore()+1);
         gmd.update(tmp);
+    }
+    public List<Gamer> getScoreboard() {
+        return gmd.findAll().stream().sorted(Comparator.comparingInt(Gamer::getScore).reversed()).limit(10).collect(Collectors.toList());
     }
 }

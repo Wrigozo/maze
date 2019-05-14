@@ -16,7 +16,6 @@
         <mainClass>game.Main</mainClass>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
-        <log4j.version>2.11.2</log4j.version>
         <slf4j.version>1.7.26</slf4j.version>
         <log4j.version>2.11.2</log4j.version>
         <dependency.locations.enabled>false</dependency.locations.enabled>
