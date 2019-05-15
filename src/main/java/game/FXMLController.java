@@ -148,7 +148,6 @@ public class FXMLController {
         game.setVisible(true);
     }
 
-
     @FXML
     private void mazeButtonAction(ActionEvent event) {
         if (true) {//state.yourTurn) {
@@ -158,7 +157,7 @@ public class FXMLController {
             state = new State(buttons.getRowIndex(player), buttons.getColumnIndex(player));
             state.setEnableButtons(buttons.getRowIndex(player), buttons.getColumnIndex(player));
 
-
+            logger.info(state.getEnableButtonsPlayer()+"");
             if (state.getEnableButtonsPlayer().contains(btn.getId())) {
                 setCoordinatesCircle(player, toX, toY);
                 logger.info("You clicked btn" + toX+""+ toY + "!");
