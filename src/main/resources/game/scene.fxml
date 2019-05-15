@@ -17,7 +17,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="833.0" prefWidth="863.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="game.FXMLController">
     <children>
-      <AnchorPane fx:id="start" layoutX="-8.0" prefHeight="833.0" prefWidth="863.0">
+      <AnchorPane fx:id="start" layoutX="-8.0" prefHeight="833.0" prefWidth="863.0" visible="false">
          <children>
             <GridPane layoutX="172.0" layoutY="363.0" prefHeight="54.0" prefWidth="539.0">
               <columnConstraints>
@@ -51,7 +51,7 @@
                      </font></TextField>
                </children>
             </GridPane>
-            <Button layoutX="377.0" layoutY="467.0" mnemonicParsing="false" onAction="#OKButtonAction"  prefHeight="45.0" prefWidth="113.0" text="OK">
+            <Button layoutX="377.0" layoutY="467.0" mnemonicParsing="false" onAction="#OKButtonAction" prefHeight="45.0" prefWidth="113.0" text="OK">
                <font>
                   <Font size="19.0" />
                </font>
@@ -133,15 +133,25 @@
             </GridPane>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="WIN" prefHeight="833.0" prefWidth="863.0" visible="false">
+      <AnchorPane fx:id="WIN" prefHeight="833.0" prefWidth="863.0">
          <children>
-              <Label fx:id="winLabel" alignment="CENTER" layoutX="188.0" layoutY="257.0" minHeight="16" minWidth="69" prefHeight="160.0" prefWidth="487.0" text="Nyertél!">
+              <Label alignment="CENTER_RIGHT" layoutX="188.0" layoutY="332.0" minHeight="16" minWidth="69" prefHeight="85.0" prefWidth="252.0" text="A pontjaid:">
                <font>
-                  <Font size="65.0" />
+                  <Font size="34.0" />
                </font>
             </Label>
             <Button fx:id="newgame" layoutX="367.0" layoutY="461.0" onAction="#initialize" onDragDetected="#initialize" prefHeight="35.0" prefWidth="130.0" text="Új játék" />
             <Button layoutX="367.0" layoutY="516.0" onAction="#rankListButtonAction" prefHeight="35.0" prefWidth="130.0" text="Ranglista" />
+            <Label fx:id="winLabel" alignment="CENTER" layoutX="189.0" layoutY="139.0" minHeight="16" minWidth="69" prefHeight="160.0" prefWidth="487.0" text="Nyertél!">
+               <font>
+                  <Font size="65.0" />
+               </font>
+            </Label>
+            <Label fx:id="pointsLabel" layoutX="443.0" layoutY="332.0" minHeight="16" minWidth="69" prefHeight="85.0" prefWidth="213.0">
+               <font>
+                  <Font size="34.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="RankList" prefHeight="833.0" prefWidth="863.0" visible="false">
