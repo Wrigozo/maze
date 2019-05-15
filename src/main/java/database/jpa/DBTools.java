@@ -37,7 +37,7 @@ public class DBTools {
      * Updates the row in the database, which contains the data of player {@code gamer}.
      * @param gamer a {@link Gamer} object, which provides data of the player.
      */
-    public void updateGamer(Gamer gamer) {
+    public void updateGamer(Gamer gamer, int newScore) {
         Gamer tmp = null;
         List<Gamer> list=gmd.findAll();
 
@@ -45,7 +45,7 @@ public class DBTools {
             if (g.getName().equals(gamer.getName()) )
                 tmp = g;
 
-        tmp.setScore(tmp.getScore()+1);
+        tmp.setScore(tmp.getScore()+newScore);
         gmd.update(tmp);
     }
     public List<Gamer> getScoreboard() {

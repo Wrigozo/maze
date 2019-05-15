@@ -2,7 +2,7 @@ package game;
 
 
 import java.lang.reflect.Field;
-import javafx.scene.input.KeyEvent;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,12 +24,12 @@ public class FXMLController {
 
 
     private Gamer gamer = new Gamer();
-    private String s;
-    @FXML
-    private Button[][] btns = new Button[6][6];
-    static DBTools valami = new DBTools();
     private boolean win;
+    @FXML
+    private  Button[][] btns = new Button[6][6];
+    private static DBTools gameState = new DBTools();
     private static Logger logger = LoggerFactory.getLogger(FXMLController.class);
+    private int scoreCounter=0;
     @FXML
     State state;
 
@@ -139,8 +139,8 @@ public class FXMLController {
         start.setVisible(false);
 
         gamer.setName(name.getText());
-        valami.addGamer(gamer);
-        valami.updateGamer(gamer);
+        gameState.addGamer(gamer);
+
         logger.info("You clicked OK succesfully!");
         game.setVisible(true);
     }
@@ -156,8 +156,9 @@ public class FXMLController {
             state.setEnableButtons(buttons.getRowIndex(player), buttons.getColumnIndex(player));
 
 
-            if ( state.getEnableButtons().contains(btn.getId()) ) {
+            if (state.getEnableButtons().contains(btn.getId())) {
                 setCoordinatesCircle(player, toX, toY);
+                scoreCounter++;
                 int[] enemyCoordinate = state.enemylepes(buttons.getRowIndex(enemy), buttons.getColumnIndex(enemy), buttons.getRowIndex(player), buttons.getColumnIndex(player));
                 setCoordinatesCircle(enemy, enemyCoordinate[0], enemyCoordinate[1]);
                 logger.info("You clicked btn" + toX, toY + "!");
@@ -180,17 +181,21 @@ public class FXMLController {
     private void endGameView() {
         game.setVisible(false);
         if (win) {
+            gameState.updateGamer(gamer, scoreCounter);
             winLabel.setText("Nyertél!");
+
         } else
             winLabel.setText("Vesztettél!");
+
+        logger.info("A pontjaid száma:"+scoreCounter);
         WIN.setVisible(true);
     }
 
     @FXML
     private void rankListButtonAction(ActionEvent event) {
         WIN.setVisible(false);
-
-        ObservableList<Gamer> board = FXCollections.observableList(valami.getScoreboard());
+        gameState.updateGamer(gamer, 0);
+        ObservableList<Gamer> board = FXCollections.observableList(gameState.getScoreboard());
 
         ids.setCellValueFactory(new PropertyValueFactory<>("id"));
         names.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -213,16 +218,14 @@ public class FXMLController {
                 try {
                     Field f = this.getClass().getDeclaredField("btn" + Integer.toString(i) + Integer.toString(j));
                     btns[i][j] = (Button) f.get(this);
-                    logger.info("btn" + i+ j);
+                    logger.info("btn" + i + j);
 
                 } catch (NoSuchFieldException ex) {
                     logger.error("no such field");
 
                 } catch (IllegalAccessException ex2) {
                     logger.error("illegal access");
-
                 }
-
             }
         }
     }
@@ -231,13 +234,13 @@ public class FXMLController {
     private void setCoordinatesCircle(Circle ball, int posX, int posY) {
         buttons.setRowIndex(ball, posX);
         buttons.setColumnIndex(ball, posY);
-
     }
 
     @FXML
     private void initialize() {
         // TODO
         start.setVisible(true);
+        scoreCounter=0;
         setCoordinatesCircle(player, 0, 0);
         setCoordinatesCircle(enemy, 2, 4);
         generateButtons();
