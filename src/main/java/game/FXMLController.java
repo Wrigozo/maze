@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-
 import database.gamer.Gamer;
 import database.jpa.DBTools;
 import javafx.collections.FXCollections;
@@ -25,12 +24,12 @@ public class FXMLController {
 
 
     private Gamer gamer = new Gamer();
-    private boolean win=true;
+    private boolean win = true;
     @FXML
-    private  Button[][] btns = new Button[6][6];
+    private Button[][] btns = new Button[6][6];
     private static DBTools gameState = new DBTools();
     private static Logger logger = LoggerFactory.getLogger(FXMLController.class);
-    private int scoreCounter=0;
+    private int scoreCounter = 0;
     @FXML
     State state;
 
@@ -157,14 +156,14 @@ public class FXMLController {
             state = new State(buttons.getRowIndex(player), buttons.getColumnIndex(player));
             state.setEnableButtons(buttons.getRowIndex(player), buttons.getColumnIndex(player));
 
-            logger.info(state.getEnableButtonsPlayer()+"");
+            logger.info(state.getEnableButtonsPlayer() + "");
             if (state.getEnableButtonsPlayer().contains(btn.getId())) {
                 setCoordinatesCircle(player, toX, toY);
-                logger.info("You clicked btn" + toX+""+ toY + "!");
+                logger.info("You clicked btn" + toX + "" + toY + "!");
                 scoreCounter++;
                 int[] enemyCoordinate;
-                int x=0;
-                while(x<2) {
+                int x = 0;
+                while (x < 2) {
                     enemyCoordinate = state.enemylepes(buttons.getRowIndex(enemy), buttons.getColumnIndex(enemy), buttons.getRowIndex(player), buttons.getColumnIndex(player));
                     for (int i = 0; i < 4; i++) {
                         System.out.print(state.lepesekEnemy[i]);
@@ -178,10 +177,6 @@ public class FXMLController {
                     logger.info("enemy's coordinates after move: " + buttons.getRowIndex(enemy) + " " + buttons.getColumnIndex(enemy));
                     x++;
                 }
-
-
-
-
             } else
                 logger.warn("ide nem léphetsz");
         } else
@@ -189,32 +184,29 @@ public class FXMLController {
         if (buttons.getRowIndex(player) == 0 && buttons.getColumnIndex(player) == 4) {
             win = true;
             endGameView();
-        }
-        else if (buttons.getRowIndex(player) == buttons.getRowIndex(enemy) && buttons.getColumnIndex(player) == buttons.getColumnIndex(enemy)) {
+        } else if (buttons.getRowIndex(player) == buttons.getRowIndex(enemy) && buttons.getColumnIndex(player) == buttons.getColumnIndex(enemy)) {
             win = false;
             endGameView();
         }
-
-
     }
 
     @FXML
     private void endGameView() {
-        logger.info(win+""+scoreCounter);
+        logger.info(win + "" + scoreCounter);
         game.setVisible(false);
         WIN.setVisible(true);
         if (win) {
             gameState.updateGamer(gamer, scoreCounter);
             winLabel.setText("Nyertél!");
 
-        } else{
+        } else {
             winLabel.setText("Vesztettél!");
-            scoreCounter=0;
+            scoreCounter = 0;
         }
 
-        pointsLabel.setText(scoreCounter+"");
+        pointsLabel.setText(scoreCounter + "");
 
-        logger.info("A pontjaid száma:"+scoreCounter);
+        logger.info("A pontjaid száma:" + scoreCounter);
 
     }
 
@@ -267,7 +259,7 @@ public class FXMLController {
     private void initialize() {
         // TODO
         start.setVisible(true);
-        scoreCounter=0;
+        scoreCounter = 0;
         setCoordinatesCircle(player, 0, 0);
         setCoordinatesCircle(enemy, 2, 4);
         generateButtons();
