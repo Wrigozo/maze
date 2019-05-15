@@ -100,6 +100,8 @@ public class State {
         int [] s=new int[2];
         s[0]=enemyPosX;
         s[1]=enemyPosY;
+        this.ishorizontal = new ArrayList<>();
+        this.isVertical=new ArrayList<>();
         this.lepesekEnemy = canStep[s[0]][s[1]];
         for (int i = 0; i < lepesekEnemy.length; i++) {
             if (lepesekEnemy[i] != 0) {

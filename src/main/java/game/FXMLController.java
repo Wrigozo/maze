@@ -1,9 +1,8 @@
 package game;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
 
+import java.lang.reflect.Field;
+import javafx.scene.input.KeyEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,8 +30,8 @@ public class FXMLController {
     static DBTools valami = new DBTools();
     private boolean win;
     private static Logger logger = LoggerFactory.getLogger(FXMLController.class);
+    @FXML
     State state;
-    List<String> operators = new ArrayList<>();
 
     @FXML
     private AnchorPane start;
@@ -61,6 +60,79 @@ public class FXMLController {
     @FXML
     private TableView scoreboard;
 
+    @FXML
+    private Button btn00;
+    @FXML
+    private Button btn01;
+    @FXML
+    private Button btn02;
+    @FXML
+    private Button btn03;
+    @FXML
+    private Button btn04;
+    @FXML
+    private Button btn05;
+    @FXML
+    private Button btn10;
+    @FXML
+    private Button btn11;
+    @FXML
+    private Button btn12;
+    @FXML
+    private Button btn13;
+    @FXML
+    private Button btn14;
+    @FXML
+    private Button btn15;
+    @FXML
+    private Button btn20;
+    @FXML
+    private Button btn21;
+    @FXML
+    private Button btn22;
+    @FXML
+    private Button btn23;
+    @FXML
+    private Button btn24;
+    @FXML
+    private Button btn25;
+    @FXML
+    private Button btn30;
+    @FXML
+    private Button btn31;
+    @FXML
+    private Button btn32;
+    @FXML
+    private Button btn33;
+    @FXML
+    private Button btn34;
+    @FXML
+    private Button btn35;
+    @FXML
+    private Button btn40;
+    @FXML
+    private Button btn41;
+    @FXML
+    private Button btn42;
+    @FXML
+    private Button btn43;
+    @FXML
+    private Button btn44;
+    @FXML
+    private Button btn45;
+    @FXML
+    private Button btn50;
+    @FXML
+    private Button btn51;
+    @FXML
+    private Button btn52;
+    @FXML
+    private Button btn53;
+    @FXML
+    private Button btn54;
+    @FXML
+    private Button btn55;
+
 
     @FXML
     private void OKButtonAction(ActionEvent event) {
@@ -73,6 +145,7 @@ public class FXMLController {
         game.setVisible(true);
     }
 
+
     @FXML
     private void mazeButtonAction(ActionEvent event) {
         if (true) {//state.yourTurn) {
@@ -81,17 +154,12 @@ public class FXMLController {
             int toY = Character.getNumericValue(btn.getId().charAt(4));
             state = new State(buttons.getRowIndex(player), buttons.getColumnIndex(player));
             state.setEnableButtons(buttons.getRowIndex(player), buttons.getColumnIndex(player));
-            operators = state.getEnableButtons();
-            logger.info(state.ishorizontal + "");
-            logger.info(state.isVertical + "");
-            //kiíratja a használható operátorokat
-            for (int i = 0; i < operators.size(); i++) {
-                logger.info(operators.get(i) + "");
-            }
-            if (operators.contains(btn.getId())) {
-                setCoordinatesCircles(player, toX, toY);
-                int[] coordinate = state.enemylepes(buttons.getRowIndex(enemy), buttons.getColumnIndex(enemy), buttons.getRowIndex(player), buttons.getColumnIndex(player));
-                setCoordinatesCircles(enemy, coordinate[0], coordinate[1]);
+
+
+            if ( state.getEnableButtons().contains(btn.getId()) ) {
+                setCoordinatesCircle(player, toX, toY);
+                int[] enemyCoordinate = state.enemylepes(buttons.getRowIndex(enemy), buttons.getColumnIndex(enemy), buttons.getRowIndex(player), buttons.getColumnIndex(player));
+                setCoordinatesCircle(enemy, enemyCoordinate[0], enemyCoordinate[1]);
                 logger.info("You clicked btn" + toX, toY + "!");
             } else
                 logger.warn("ide nem léphetsz");
@@ -138,12 +206,14 @@ public class FXMLController {
         WIN.setVisible(true);
     }
 
+    @FXML
     private void generateButtons() {
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 6; j++) {
                 try {
                     Field f = this.getClass().getDeclaredField("btn" + Integer.toString(i) + Integer.toString(j));
                     btns[i][j] = (Button) f.get(this);
+                    logger.info("btn" + i+ j);
 
                 } catch (NoSuchFieldException ex) {
                     logger.error("no such field");
@@ -157,20 +227,23 @@ public class FXMLController {
         }
     }
 
-    private void setCoordinatesCircles(Circle ball, int posX, int posY) {
+    @FXML
+    private void setCoordinatesCircle(Circle ball, int posX, int posY) {
         buttons.setRowIndex(ball, posX);
         buttons.setColumnIndex(ball, posY);
+
     }
 
     @FXML
-    public void initialize() {
+    private void initialize() {
         // TODO
         start.setVisible(true);
-        setCoordinatesCircles(player, 0, 0);
-        setCoordinatesCircles(enemy, 2, 4);
+        setCoordinatesCircle(player, 0, 0);
+        setCoordinatesCircle(enemy, 2, 4);
         generateButtons();
         game.setVisible(false);
         WIN.setVisible(false);
         RankList.setVisible(false);
+        logger.info("The game has been initialized successfully!");
     }
 }

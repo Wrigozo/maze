@@ -21,7 +21,9 @@
         <dependency.locations.enabled>false</dependency.locations.enabled>
         <exec.cleanupDaemonThreads>false</exec.cleanupDaemonThreads>
     </properties>
-    <description>Labirintus játék. A játékosnak ki kell jutnia a labirintusból, úgy, hogy a szörny ne tudja elkapni.</description>
+
+    <description>This is an escape game. The player has to get out of the maze so that the monster can not catch the player.</description>
+
     <developers>
         <developer>
             <name>Szabó Alexandra</name>
@@ -135,7 +137,6 @@
         </dependency>
     </dependencies>
 
-
     <profiles>
 
         <profile>
@@ -235,7 +236,6 @@
                     </execution>
                 </executions>
             </plugin>
-
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
@@ -251,7 +251,6 @@
                     <mainClass>${mainClass}</mainClass>
                 </configuration>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-checkstyle-plugin</artifactId>
@@ -278,8 +277,8 @@
         <filters>
             <filter>database.properties</filter>
         </filters>
-
     </build>
+
     <repositories>
         <repository>
             <id>maven.oracle.com</id>
@@ -293,6 +292,7 @@
             <layout>default</layout>
         </repository>
     </repositories>
+
     <pluginRepositories>
         <pluginRepository>
             <id>maven.oracle.com</id>
