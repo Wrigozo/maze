@@ -10,9 +10,9 @@ Cél: jusson ki az útvesztőből, elkerülve, vagy csapdába csalva a szörnyet
 
 Játék előtti teendők:
 
-1.Hozz létre egy database.properties fájlt a projektmappában.
+1.Keresd meg a database.properties fájlt a projektmappában.
 
-2.Add hozzá a következő sorokat:
+2.Módosítsd a következő sorokat:
 
 * guice.url = adatbázis url címe
 
