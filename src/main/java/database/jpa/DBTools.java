@@ -10,17 +10,22 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Egy osztály, amely adatbázismódosító függvényeket szolgáltat.
+ */
 public class DBTools {
+    /**
+     * Egy {@code GamerDao} objektum.
+     */
     private GamerDao gmd;
 
     public DBTools() {
         Injector injector = Guice.createInjector(new PersistenceModule("Gamer"));
         gmd = injector.getInstance(GamerDao.class);
     }
-
     /**
-     * Inserts a row with the data of the player into the database, if it is not present yet.
-     * @param gamer a {@link Gamer} object, which provides data of the player.
+     * Beszúr egy sort a játékos adataival az adatbázisba, ha az még nincs jelen.
+     * @param gamer egy {@link Gamer} objektum, ami a játékos adatait szolgáltatja.
      */
     public void addGamer(Gamer gamer) {
         Gamer tmp = null;
@@ -33,9 +38,11 @@ public class DBTools {
         if(tmp == null)
             gmd.persist(gamer);
     }
+
     /**
-     * Updates the row in the database, which contains the data of player {@code gamer}.
-     * @param gamer a {@link Gamer} object, which provides data of the player.
+     * Frissít egy sort az adatbázisban, ami a megadott {@code gamer} adatait  tartalmazza.
+     * @param gamer egy {@link Gamer} objektum, ami a játékos adatait szolgáltatja.
+     * @param newScore egy {@code int} érték, amellyel a {@code gamer} score értéke növelődni fog
      */
     public void updateGamer(Gamer gamer, int newScore) {
         Gamer tmp = null;
@@ -48,6 +55,12 @@ public class DBTools {
         tmp.setScore(tmp.getScore()+newScore);
         gmd.update(tmp);
     }
+
+    /**
+     * Ez a függvény lekér az adatbázisból minden játékost, aztán kiválasztja a legjobb 10-et pontszám alapján és
+     * rendezi pontszám alapján csökkenő sorrendben.
+     * @return egy {@code List<Gamer>} típusú objektumot ad vissza, ami a 10 legjobb játékost tartalmazza
+     */
     public List<Gamer> getScoreboard() {
         return gmd.findAll().stream().sorted(Comparator.comparingInt(Gamer::getScore).reversed()).limit(10).collect(Collectors.toList());
     }
