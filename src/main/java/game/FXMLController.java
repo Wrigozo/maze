@@ -165,13 +165,6 @@ public class FXMLController {
                 int x = 0;
                 while (x < 2) {
                     enemyCoordinate = state.enemylepes(buttons.getRowIndex(enemy), buttons.getColumnIndex(enemy), buttons.getRowIndex(player), buttons.getColumnIndex(player));
-                    for (int i = 0; i < 4; i++) {
-                        System.out.print(state.lepesekEnemy[i]);
-                    }
-                    for (String s : state.getEnableButtonsEnemy()) {
-                        System.out.print(s);
-                        System.out.print(" ");
-                    }
                     logger.info("enemy's coordinates before move: " + buttons.getRowIndex(enemy) + " " + buttons.getColumnIndex(enemy));
                     setCoordinatesCircle(enemy, enemyCoordinate[0], enemyCoordinate[1]);
                     logger.info("enemy's coordinates after move: " + buttons.getRowIndex(enemy) + " " + buttons.getColumnIndex(enemy));

@@ -1,4 +1,4 @@
 /**
- * Provides helper classes to work with JPA.
+ * A JPA-val való munkát elősegítő osztályokat tartalmazza.
  */
 package database.jpa;

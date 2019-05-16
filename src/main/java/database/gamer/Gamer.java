@@ -11,7 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 /**
- * Class representing the data of a player.
+ * Játékos adatait reprezentálja.
  */
 @Data
 @NoArgsConstructor
@@ -24,14 +24,15 @@ public class Gamer {
     @Id
     private int id;
 
+
     /**
-     * The name of the player.
+     * Játékos neve.
      */
     @Column(nullable = false)
     private String name;
 
     /**
-     * The amount of scores the player has.
+     * Játékos pontszáma.
      */
     @Column(nullable = false)
     private int score=0;
