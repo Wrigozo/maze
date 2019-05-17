@@ -41,6 +41,7 @@ public class State {
      * Egy {@code int} érték, a szörny x koordinátáját tárolja..
      */
     public int actualPosXEnemy;
+
     /**
      * Egy {@code int} érték, a szörny y koordinátáját tárolja..
      */
@@ -84,12 +85,36 @@ public class State {
 
 
 
-    public State(int actualposXPlayer, int actualposYPlayer,int actualposXEnemy, int actualPosYEnemy) {
+    public State(int actualposXPlayer, int actualposYPlayer,int actualposXEnemy, int actualposYEnemy) {
         this.actualPosXPlayer = actualposXPlayer;
         this.actualPosYPlayer = actualposYPlayer;
         this.lepesekPlayer = canStep[actualPosXPlayer][actualPosYPlayer];
+        this.lepesekEnemy=canStep[actualPosXEnemy][actualPosYEnemy];
         this.actualPosXEnemy=actualposXEnemy;
-        this.actualPosYEnemy=actualPosYEnemy;
+        this.actualPosYEnemy=actualposYEnemy;
+    }
+    public List<String> getIshorizontalEnemy() {
+        return ishorizontalEnemy;
+    }
+
+    public static int[][][] getCanStep() {
+        return canStep;
+    }
+
+    public int getActualPosXEnemy() {
+        return actualPosXEnemy;
+    }
+
+    public int getActualPosYEnemy() {
+        return actualPosYEnemy;
+    }
+
+    public List<String> getIsVerticalEnemy() {
+        return isVerticalEnemy;
+    }
+
+    public List<String> getEnableButtonsEnemy() {
+        return enableButtonsEnemy;
     }
 
     /**
@@ -133,7 +158,7 @@ public class State {
      * a 0-ás pedig, hogy nem.
      * @param enableButtons egy {@link List}&lt;{@link String}&gt; típusú objektum, mely azoknak a gomboknak a nevét tárolja, ahova a szörny vízszintes irányú lépéssel léphet.
      */
-    private void enableButtons(int posX, int posY, List<String> isHorizontal, List<String> isVertical, int[] lepesek, List<String> enableButtons) {
+    public void enableButtons(int posX, int posY, List<String> isHorizontal, List<String> isVertical, int[] lepesek, List<String> enableButtons) {
         int tmpX = posX;
         int tmpY = posY;
         for (int i = 0; i < lepesek.length; i++) {
@@ -173,7 +198,7 @@ public class State {
      * @param lepesek egy {@code int[]} tömb, mely a megadott elem lehetséges lépéseit tárolja a következő sorrendben fent, jobbra, lent és balra. Az 1-es érték jelentése, hogy léphet a megfelelő irányba,
      *      * a 0-ás pedig, hogy nem.
      */
-    private void checkDirection(int enemyPosX, int enemyPosY, int playerPosX, int playerPosY, int[] newCoordinatesOfTheEnemy,  int[] lepesek) {
+    public void checkDirection(int enemyPosX, int enemyPosY, int playerPosX, int playerPosY, int[] newCoordinatesOfTheEnemy,  int[] lepesek) {
         if (ishorizontalEnemy.size() != 0) {
 
             if ((enemyPosY - playerPosY) > 0 && lepesek[3] == 1)
