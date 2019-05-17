@@ -117,6 +117,14 @@ public class State {
         return enableButtonsEnemy;
     }
 
+    public int getActualPosXPlayer() {
+        return actualPosXPlayer;
+    }
+
+    public int getActualPosYPlayer() {
+        return actualPosYPlayer;
+    }
+
     /**
      *Visszadja a szörny új koordinátáit.
      * @param enemyPosX egy {@code int} érték, amely tárolja a szörny aktuális x koordinátáját
