@@ -19,7 +19,7 @@ public class State {
      * Egy {@code int[][][]} tömb, mely labirintus mátrixának megfelelő koordinátáin tárolja, hogy hol vannak falak, a
      * következő sorrendben: fent, jobbra, lent és balra. Az 0-ás érték jelentése, hogy van fal, a 1-es pedig, hogy nincs.
      */
-    public static int[][][] canStep = {
+    public static final int[][][] canStep = {
             {{0, 1, 0, 0}, {0, 1, 1, 1}, {0, 1, 1, 1}, {0, 1, 1, 1}, {0, 0, 1, 1}, {0, 0, 1, 0}},
             {{0, 1, 1, 0}, {1, 0, 0, 1}, {1, 1, 1, 0}, {1, 0, 1, 1}, {1, 0, 0, 0}, {1, 0, 1, 0}},
             {{1, 0, 1, 0}, {0, 0, 1, 0}, {1, 0, 0, 0}, {1, 1, 1, 0}, {0, 1, 0, 1}, {1, 0, 1, 1}},
@@ -32,26 +32,26 @@ public class State {
     /**
      * Egy {@code int} érték, a játékos x koordinátáját tárolja..
      */
-    public int actualPosXPlayer;
+    private int actualPosXPlayer;
     /**
      * Egy {@code int} érték, a játékos y koordinátáját tárolja..
      */
-    public int actualPosYPlayer;
+    private int actualPosYPlayer;
     /**
      * Egy {@code int} érték, a szörny x koordinátáját tárolja..
      */
-    public int actualPosXEnemy;
+    private int actualPosXEnemy;
 
     /**
      * Egy {@code int} érték, a szörny y koordinátáját tárolja..
      */
-    public int actualPosYEnemy;
+    private int actualPosYEnemy;
     /**
      * Egy {@code int[]} tömb, mely a szörny lehetséges lépéseit tárolja a szörny koordinátáinak megfelelően,
      * a következő sorrendben fent, jobbra, lent és balra. Az 1-es érték jelentése, hogy léphet a megfelelő irányba,
      * a 0-ás pedig, hogy nem.
      */
-    public int[] lepesekEnemy = new int[4];
+    private int[] lepesekEnemy = new int[4];
     /**
      * Egy {@code int[]} tömb, mely a játékos lehetséges lépéseit tárolja a játékos koordinátáinak megfelelően,
      * a következő sorrendben fent, jobbra, lent és balra. Az 1-es érték jelentése, hogy léphet a megfelelő irányba,
@@ -61,27 +61,27 @@ public class State {
     /**
      * Egy {@link List}&lt;{@link String}&gt; típusú objektum, mely azoknak a gomboknak a nevét tárolja, ahova a játékos vízszintes irányú lépéssel léphet.
      */
-    public List<String> ishorizontalPlayer;
+    private List<String> ishorizontalPlayer;
     /**
      * Egy {@link List}&lt;{@link String}&gt; típusú objektum, mely azoknak a gomboknak a nevét tárolja, ahova a játékos függőleges irányú lépéssel léphet.
      */
-    public List<String> isVerticalPlayer;
+    private List<String> isVerticalPlayer;
     /**
      * Egy {@link List}&lt;{@link String}&gt; típusú objektum, mely azoknak a gomboknak a nevét tárolja, ahova a szörny vízszintes irányú lépéssel léphet.
      */
-    public List<String> ishorizontalEnemy;
+    private List<String> ishorizontalEnemy;
     /**
      * Egy {@link List}&lt;{@link String}&gt; típusú objektum, mely azoknak a gomboknak a nevét tárolja, ahova a szörny függőleges irányú lépéssel léphet.
      */
-    public List<String> isVerticalEnemy;
+    private List<String> isVerticalEnemy;
     /**
      * Egy {@link List}&lt;{@link String}&gt; típusú objektum, mely tárolja azoknak a gomboknak a nevét,hogy ahova léphet a játékos.
      */
-    public List<String> enableButtonsPlayer = new ArrayList<>();
+    private List<String> enableButtonsPlayer = new ArrayList<>();
     /**
      * Egy {@link List}&lt;{@link String}&gt; típusú objektum, mely tárolja azoknak a gomboknak a nevét,hogy ahova léphet a szörny.
      */
-    public List<String> enableButtonsEnemy = new ArrayList<>();
+    private List<String> enableButtonsEnemy = new ArrayList<>();
 
 
 

@@ -38,18 +38,18 @@ public class StateTest {
     @Test
     void isWin() {
         State state=new State(0,4,1,1);
-        assertTrue(state.isWin(state.actualPosXPlayer,state.actualPosYPlayer));
+        assertTrue(state.isWin(state.getActualPosXPlayer(),state.getActualPosYPlayer()));
         state=new State(3,4,1,1);
-        assertFalse(state.isWin(state.actualPosXPlayer,state.actualPosYPlayer));
+        assertFalse(state.isWin(state.getActualPosXPlayer(),state.getActualPosYPlayer()));
 
     }
 
     @Test
     void isDefeated() {
         State state=new State(0,4,0,4);
-        assertTrue(state.isDefeated(state.actualPosXPlayer,state.actualPosYPlayer,state.actualPosXEnemy,state.actualPosYEnemy));
+        assertTrue(state.isDefeated(state.getActualPosXPlayer(),state.getActualPosYPlayer(),state.getActualPosXEnemy(),state.getActualPosYEnemy()));
         state=new State(0,4,0,3);
-        assertFalse(state.isDefeated(state.actualPosXPlayer,state.actualPosYPlayer,state.actualPosXEnemy,state.actualPosYEnemy));
+        assertFalse(state.isDefeated(state.getActualPosXPlayer(),state.getActualPosYPlayer(),state.getActualPosXEnemy(),state.getActualPosYEnemy()));
     }
 
     @Test
