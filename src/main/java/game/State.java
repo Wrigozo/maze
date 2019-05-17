@@ -30,13 +30,21 @@ public class State {
     private static Logger logger = LoggerFactory.getLogger(State.class);
 
     /**
-     * Egy {@code int} érték, játékos x koordinátáját tárolja..
+     * Egy {@code int} érték, a játékos x koordinátáját tárolja..
      */
-    public int actualPosX;
+    public int actualPosXPlayer;
     /**
-     * Egy {@code int} érték, játékos y koordinátáját tárolja..
+     * Egy {@code int} érték, a játékos y koordinátáját tárolja..
      */
-    public int actualPosY;
+    public int actualPosYPlayer;
+    /**
+     * Egy {@code int} érték, a szörny x koordinátáját tárolja..
+     */
+    public int actualPosXEnemy;
+    /**
+     * Egy {@code int} érték, a szörny y koordinátáját tárolja..
+     */
+    public int actualPosYEnemy;
     /**
      * Egy {@code int[]} tömb, mely a szörny lehetséges lépéseit tárolja a szörny koordinátáinak megfelelően,
      * a következő sorrendben fent, jobbra, lent és balra. Az 1-es érték jelentése, hogy léphet a megfelelő irányba,
@@ -76,10 +84,12 @@ public class State {
 
 
 
-    public State(int actualposX, int actualposY) {
-        this.actualPosX = actualposX;
-        this.actualPosY = actualposY;
-        this.lepesekPlayer = canStep[actualPosX][actualPosY];
+    public State(int actualposXPlayer, int actualposYPlayer,int actualposXEnemy, int actualPosYEnemy) {
+        this.actualPosXPlayer = actualposXPlayer;
+        this.actualPosYPlayer = actualposYPlayer;
+        this.lepesekPlayer = canStep[actualPosXPlayer][actualPosYPlayer];
+        this.actualPosXEnemy=actualposXEnemy;
+        this.actualPosYEnemy=actualPosYEnemy;
     }
 
     /**
@@ -95,7 +105,7 @@ public class State {
         this.lepesekEnemy = canStep[enemyPosX][enemyPosY];
         this.ishorizontalEnemy = new ArrayList<>();
         this.isVerticalEnemy = new ArrayList<>();
-        EnableButtons(enemyPosX, enemyPosY, ishorizontalEnemy, isVerticalEnemy, lepesekEnemy, enableButtonsEnemy);
+        enableButtons(enemyPosX, enemyPosY, ishorizontalEnemy, isVerticalEnemy, lepesekEnemy, enableButtonsEnemy);
         checkDirection(enemyPosX, enemyPosY, playerPosX, playerPosY, newCoordinatesOfTheEnemy, lepesekEnemy);
 
         return newCoordinatesOfTheEnemy;
@@ -107,10 +117,10 @@ public class State {
      * @param actualY egy {@code int} érték, amely az aktuális y koordinátáját tárolja a játékosnak
      */
     public void setEnableButtons(int actualX, int actualY) {
-        State state = new State(actualX, actualY);
+        State state = new State(actualPosXPlayer, actualPosYPlayer, actualPosXEnemy, actualPosYEnemy);
         this.ishorizontalPlayer = new ArrayList<>();
         this.isVerticalPlayer = new ArrayList<>();
-        EnableButtons(actualX, actualY, ishorizontalPlayer, isVerticalPlayer, state.lepesekPlayer, enableButtonsPlayer);
+        enableButtons(actualX, actualY, ishorizontalPlayer, isVerticalPlayer, state.lepesekPlayer, enableButtonsPlayer);
     }
 
     /**
@@ -123,7 +133,7 @@ public class State {
      * a 0-ás pedig, hogy nem.
      * @param enableButtons egy {@link List}&lt;{@link String}&gt; típusú objektum, mely azoknak a gomboknak a nevét tárolja, ahova a szörny vízszintes irányú lépéssel léphet.
      */
-    private void EnableButtons(int posX, int posY, List<String> isHorizontal, List<String> isVertical, int[] lepesek, List<String> enableButtons) {
+    private void enableButtons(int posX, int posY, List<String> isHorizontal, List<String> isVertical, int[] lepesek, List<String> enableButtons) {
         int tmpX = posX;
         int tmpY = posY;
         for (int i = 0; i < lepesek.length; i++) {
@@ -197,6 +207,17 @@ public class State {
             newCoordinatesOfTheEnemy[1] = enemyPosY;
 
         }
+    }
+    public boolean isWin(int actualPosXPlayer, int actualPosYPlayer){
+        if(actualPosXPlayer==0&&actualPosYPlayer==4)
+            return true;
+        else return false;
+    }
+    public boolean isDefeated(int actualPosXPlayer, int actualPosYPlayer, int actualPosXEnemy, int actualPosYEnemy){
+        if(actualPosXPlayer==actualPosXEnemy&&actualPosYPlayer==actualPosYEnemy){
+            return true;
+        }
+        else return false;
     }
 
 

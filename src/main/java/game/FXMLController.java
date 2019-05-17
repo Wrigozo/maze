@@ -153,7 +153,7 @@ public class FXMLController {
             Button btn = (Button) event.getSource();
             int toX = Character.getNumericValue(btn.getId().charAt(3));
             int toY = Character.getNumericValue(btn.getId().charAt(4));
-            state = new State(buttons.getRowIndex(player), buttons.getColumnIndex(player));
+            state = new State(buttons.getRowIndex(player), buttons.getColumnIndex(player), buttons.getRowIndex(enemy),buttons.getColumnIndex(enemy));
             state.setEnableButtons(buttons.getRowIndex(player), buttons.getColumnIndex(player));
 
             logger.info(state.getEnableButtonsPlayer() + "");
@@ -161,6 +161,11 @@ public class FXMLController {
                 setCoordinatesCircle(player, toX, toY);
                 logger.info("You clicked btn" + toX + "" + toY + "!");
                 scoreCounter++;
+                if(state.isWin(buttons.getRowIndex(player),buttons.getColumnIndex(player))){
+                    win = true;
+                    endGameView();
+                    return;
+                }
                 int[] enemyCoordinate;
                 int x = 0;
                 while (x < 2) {
@@ -174,10 +179,8 @@ public class FXMLController {
                 logger.warn("ide nem léphetsz");
         } else
             logger.error("Nem te következel");
-        if (buttons.getRowIndex(player) == 0 && buttons.getColumnIndex(player) == 4) {
-            win = true;
-            endGameView();
-        } else if (buttons.getRowIndex(player) == buttons.getRowIndex(enemy) && buttons.getColumnIndex(player) == buttons.getColumnIndex(enemy)) {
+
+        if(state.isDefeated(buttons.getRowIndex(player),buttons.getColumnIndex(player),buttons.getRowIndex(enemy), buttons.getColumnIndex(enemy))){
             win = false;
             endGameView();
         }
