@@ -154,10 +154,10 @@ public class FXMLController {
             int toX = Character.getNumericValue(btn.getId().charAt(3));
             int toY = Character.getNumericValue(btn.getId().charAt(4));
             state = new State(buttons.getRowIndex(player), buttons.getColumnIndex(player), buttons.getRowIndex(enemy),buttons.getColumnIndex(enemy));
-            state.setEnableButtons(buttons.getRowIndex(player), buttons.getColumnIndex(player));
+            state.setEnableSteps(buttons.getRowIndex(player), buttons.getColumnIndex(player));
 
-            logger.info(state.getEnableButtonsPlayer() + "");
-            if (state.getEnableButtonsPlayer().contains(btn.getId())) {
+            logger.info(state.getEnableStepsPlayer() + "");
+            if (state.getEnableStepsPlayer().contains(btn.getId())) {
                 setCoordinatesCircle(player, toX, toY);
                 logger.info("You clicked btn" + toX + "" + toY + "!");
                 scoreCounter++;
@@ -169,7 +169,7 @@ public class FXMLController {
                 int[] enemyCoordinate;
                 int x = 0;
                 while (x < 2) {
-                    enemyCoordinate = state.enemylepes(buttons.getRowIndex(enemy), buttons.getColumnIndex(enemy), buttons.getRowIndex(player), buttons.getColumnIndex(player));
+                    enemyCoordinate = state.enemySteps(buttons.getRowIndex(enemy), buttons.getColumnIndex(enemy), buttons.getRowIndex(player), buttons.getColumnIndex(player));
                     logger.info("enemy's coordinates before move: " + buttons.getRowIndex(enemy) + " " + buttons.getColumnIndex(enemy));
                     setCoordinatesCircle(enemy, enemyCoordinate[0], enemyCoordinate[1]);
                     logger.info("enemy's coordinates after move: " + buttons.getRowIndex(enemy) + " " + buttons.getColumnIndex(enemy));

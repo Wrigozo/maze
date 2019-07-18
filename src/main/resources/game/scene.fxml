@@ -135,7 +135,7 @@
       </AnchorPane>
       <AnchorPane fx:id="WIN" prefHeight="833.0" prefWidth="863.0">
          <children>
-              <Label alignment="CENTER_RIGHT" layoutX="188.0" layoutY="332.0" minHeight="16" minWidth="69" prefHeight="85.0" prefWidth="252.0" text="A pontjaid:">
+              <Label alignment="CENTER_RIGHT" layoutX="237.0" layoutY="332.0" minHeight="16" minWidth="69" prefHeight="85.0" prefWidth="254.0" text="A pontjaid:">
                <font>
                   <Font size="34.0" />
                </font>
@@ -147,7 +147,7 @@
                   <Font size="65.0" />
                </font>
             </Label>
-            <Label fx:id="pointsLabel" layoutX="443.0" layoutY="332.0" minHeight="16" minWidth="69" prefHeight="85.0" prefWidth="213.0">
+            <Label fx:id="pointsLabel" layoutX="493.0" layoutY="332.0" minHeight="16" minWidth="69" prefHeight="85.0" prefWidth="163.0">
                <font>
                   <Font size="34.0" />
                </font>

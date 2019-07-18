@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.ArrayList;
 
 import lombok.Getter;
-import lombok.Setter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,13 +50,13 @@ public class State {
      * a következő sorrendben fent, jobbra, lent és balra. Az 1-es érték jelentése, hogy léphet a megfelelő irányba,
      * a 0-ás pedig, hogy nem.
      */
-    private int[] lepesekEnemy = new int[4];
+    private int[] stepsOfEnemy = new int[4];
     /**
      * Egy {@code int[]} tömb, mely a játékos lehetséges lépéseit tárolja a játékos koordinátáinak megfelelően,
      * a következő sorrendben fent, jobbra, lent és balra. Az 1-es érték jelentése, hogy léphet a megfelelő irányba,
      * a 0-ás pedig, hogy nem.
      */
-    private int[] lepesekPlayer;
+    private int[] stepsOfPlayer;
     /**
      * Egy {@link List}&lt;{@link String}&gt; típusú objektum, mely azoknak a gomboknak a nevét tárolja, ahova a játékos vízszintes irányú lépéssel léphet.
      */
@@ -77,19 +76,19 @@ public class State {
     /**
      * Egy {@link List}&lt;{@link String}&gt; típusú objektum, mely tárolja azoknak a gomboknak a nevét,hogy ahova léphet a játékos.
      */
-    private List<String> enableButtonsPlayer = new ArrayList<>();
+    private List<String> enableStepsPlayer = new ArrayList<>();
     /**
      * Egy {@link List}&lt;{@link String}&gt; típusú objektum, mely tárolja azoknak a gomboknak a nevét,hogy ahova léphet a szörny.
      */
-    private List<String> enableButtonsEnemy = new ArrayList<>();
+    private List<String> enableStepsEnemy = new ArrayList<>();
 
 
 
     public State(int actualposXPlayer, int actualposYPlayer,int actualposXEnemy, int actualposYEnemy) {
         this.actualPosXPlayer = actualposXPlayer;
         this.actualPosYPlayer = actualposYPlayer;
-        this.lepesekPlayer = canStep[actualPosXPlayer][actualPosYPlayer];
-        this.lepesekEnemy=canStep[actualPosXEnemy][actualPosYEnemy];
+        this.stepsOfPlayer = canStep[actualPosXPlayer][actualPosYPlayer];
+        this.stepsOfEnemy =canStep[actualPosXEnemy][actualPosYEnemy];
         this.actualPosXEnemy=actualposXEnemy;
         this.actualPosYEnemy=actualposYEnemy;
     }
@@ -113,8 +112,8 @@ public class State {
         return isVerticalEnemy;
     }
 
-    public List<String> getEnableButtonsEnemy() {
-        return enableButtonsEnemy;
+    public List<String> getEnableStepsEnemy() {
+        return enableStepsEnemy;
     }
 
     public int getActualPosXPlayer() {
@@ -133,13 +132,13 @@ public class State {
      * @param playerPosY egy {@code int} érték, amely tárolja a játkos aktuális y koordinátáját
      * @return egy {@code int[]} tömböt ad vissza, a szörny új koordinátáit adja vissza
      */
-    public int[] enemylepes(int enemyPosX, int enemyPosY, int playerPosX, int playerPosY) {
+    public int[] enemySteps(int enemyPosX, int enemyPosY, int playerPosX, int playerPosY) {
         int[] newCoordinatesOfTheEnemy = new int[2];
-        this.lepesekEnemy = canStep[enemyPosX][enemyPosY];
+        this.stepsOfEnemy = canStep[enemyPosX][enemyPosY];
         this.ishorizontalEnemy = new ArrayList<>();
         this.isVerticalEnemy = new ArrayList<>();
-        enableButtons(enemyPosX, enemyPosY, ishorizontalEnemy, isVerticalEnemy, lepesekEnemy, enableButtonsEnemy);
-        checkDirection(enemyPosX, enemyPosY, playerPosX, playerPosY, newCoordinatesOfTheEnemy, lepesekEnemy);
+        enableSteps(enemyPosX, enemyPosY, ishorizontalEnemy, isVerticalEnemy, stepsOfEnemy, enableStepsEnemy);
+        checkDirection(enemyPosX, enemyPosY, playerPosX, playerPosY, newCoordinatesOfTheEnemy, stepsOfEnemy);
 
         return newCoordinatesOfTheEnemy;
     }
@@ -149,11 +148,11 @@ public class State {
      * @param actualX egy {@code int} érték, amely az aktuális x koordinátáját tárolja a játékosnak
      * @param actualY egy {@code int} érték, amely az aktuális y koordinátáját tárolja a játékosnak
      */
-    public void setEnableButtons(int actualX, int actualY) {
+    public void setEnableSteps(int actualX, int actualY) {
         State state = new State(actualPosXPlayer, actualPosYPlayer, actualPosXEnemy, actualPosYEnemy);
         this.ishorizontalPlayer = new ArrayList<>();
         this.isVerticalPlayer = new ArrayList<>();
-        enableButtons(actualX, actualY, ishorizontalPlayer, isVerticalPlayer, state.lepesekPlayer, enableButtonsPlayer);
+        enableSteps(actualX, actualY, ishorizontalPlayer, isVerticalPlayer, state.stepsOfPlayer, enableStepsPlayer);
     }
 
     /**
@@ -162,15 +161,15 @@ public class State {
      * @param posY egy {@code int} érték, amely az aktuális y koordinátáját tárolja a megadott elemnek
      * @param isHorizontal egy {@link List}&lt;{@link String}&gt; típusú objektum, mely azoknak a gomboknak a nevét tárolja, ahova a meadott elem vízszintes irányú lépéssel léphet.
      * @param isVertical egy {@link List}&lt;{@link String}&gt; típusú objektum, mely azoknak a gomboknak a nevét tárolja, ahova a megadott elem függőleges irányú lépéssel léphet.
-     * @param lepesek egy {@code int[]} érték, mely a megadott elem lehetséges lépéseit tárolja a következő sorrendben fent, jobbra, lent és balra. Az 1-es érték jelentése, hogy léphet a megfelelő irányba,
+     * @param steps egy {@code int[]} érték, mely a megadott elem lehetséges lépéseit tárolja a következő sorrendben fent, jobbra, lent és balra. Az 1-es érték jelentése, hogy léphet a megfelelő irányba,
      * a 0-ás pedig, hogy nem.
      * @param enableButtons egy {@link List}&lt;{@link String}&gt; típusú objektum, mely azoknak a gomboknak a nevét tárolja, ahova a szörny vízszintes irányú lépéssel léphet.
      */
-    public void enableButtons(int posX, int posY, List<String> isHorizontal, List<String> isVertical, int[] lepesek, List<String> enableButtons) {
+    public void enableSteps(int posX, int posY, List<String> isHorizontal, List<String> isVertical, int[] steps, List<String> enableButtons) {
         int tmpX = posX;
         int tmpY = posY;
-        for (int i = 0; i < lepesek.length; i++) {
-            if (lepesek[i] != 0) {
+        for (int i = 0; i < steps.length; i++) {
+            if (steps[i] != 0) {
                 switch (i) { //megvizsgálja hanyadik indexű
                     case 0:
                         posX = fel(posX);
@@ -203,21 +202,21 @@ public class State {
      * @param playerPosX egy {@code int} érték, amely tárolja a játékos aktuális x koordinátáját
      * @param playerPosY egy {@code int} érték, amely tárolja a játékos aktuális x koordinátáját
      * @param newCoordinatesOfTheEnemy egy {@code int[]} tömböt, mely tárolja a szörny új koordinátáit
-     * @param lepesek egy {@code int[]} tömb, mely a megadott elem lehetséges lépéseit tárolja a következő sorrendben fent, jobbra, lent és balra. Az 1-es érték jelentése, hogy léphet a megfelelő irányba,
+     * @param steps egy {@code int[]} tömb, mely a megadott elem lehetséges lépéseit tárolja a következő sorrendben fent, jobbra, lent és balra. Az 1-es érték jelentése, hogy léphet a megfelelő irányba,
      *      * a 0-ás pedig, hogy nem.
      */
-    public void checkDirection(int enemyPosX, int enemyPosY, int playerPosX, int playerPosY, int[] newCoordinatesOfTheEnemy,  int[] lepesek) {
+    public void checkDirection(int enemyPosX, int enemyPosY, int playerPosX, int playerPosY, int[] newCoordinatesOfTheEnemy,  int[] steps) {
         if (ishorizontalEnemy.size() != 0) {
 
-            if ((enemyPosY - playerPosY) > 0 && lepesek[3] == 1)
+            if ((enemyPosY - playerPosY) > 0 && steps[3] == 1)
                 enemyPosY = balra(enemyPosY);
-            else if ((enemyPosY - playerPosY) < 0 && lepesek[1] == 1)
+            else if ((enemyPosY - playerPosY) < 0 && steps[1] == 1)
                 enemyPosY = jobbra(enemyPosY);
 
             else if (isVerticalEnemy.size() != 0) {
-                if ((enemyPosX - playerPosX) > 0 && lepesek[0] == 1) {
+                if ((enemyPosX - playerPosX) > 0 && steps[0] == 1) {
                     enemyPosX = fel(enemyPosX);
-                } else if ((enemyPosX - playerPosX) < 0 && lepesek[2] == 1)
+                } else if ((enemyPosX - playerPosX) < 0 && steps[2] == 1)
                     enemyPosX = le(enemyPosX);
             }
             logger.info("Enemy position: (" + enemyPosX + ", " + enemyPosY + ");");
@@ -225,15 +224,15 @@ public class State {
             newCoordinatesOfTheEnemy[1] = enemyPosY;
 
         } else if (this.isVerticalEnemy.size() != 0) {
-            if ((enemyPosX - playerPosX) > 0 && lepesek[0] == 1)
+            if ((enemyPosX - playerPosX) > 0 && steps[0] == 1)
                 enemyPosX -= 1;
-            else if ((enemyPosX - playerPosX) < 0 && lepesek[2] == 1)
+            else if ((enemyPosX - playerPosX) < 0 && steps[2] == 1)
                 enemyPosX += 1;
 
             else if (this.ishorizontalEnemy.size() != 0) {
-                if ((enemyPosY - playerPosY) > 0 && lepesek[0] == 1) {
+                if ((enemyPosY - playerPosY) > 0 && steps[0] == 1) {
                     enemyPosY -= 1;
-                } else if ((enemyPosY - playerPosY) < 0 && lepesek[2] == 1)
+                } else if ((enemyPosY - playerPosY) < 0 && steps[2] == 1)
                     enemyPosY += 1;
             }
             newCoordinatesOfTheEnemy[0] = enemyPosX;
