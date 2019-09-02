@@ -20,5 +20,5 @@ Játék előtti teendők:
 
 * guice.password = jelszó az adatbázishoz
 
-
+Követemények:
 https://arato.inf.unideb.hu/jeszenszky.peter/download/swe/doc/swe-hw-hu.pdf
